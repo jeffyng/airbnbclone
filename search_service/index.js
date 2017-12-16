@@ -1,3 +1,6 @@
+const apm = require('elastic-apm-node').start({
+  appName: 'search-service'
+});
 const app = require('express')();
 const axios = require('axios');
 const bodyParser = require('body-parser');
@@ -83,6 +86,12 @@ app.post('/listings/add', function (req, res) {
     res.sendStatus(400);
   }
 })
+
+app.use(function (req, res) {
+  res.status(404).send("This is not the page you are looking for..")
+})
+
+app.use(apm.middleware.express());
 
 app.listen(port, function() {
   console.log('Server is running...');
