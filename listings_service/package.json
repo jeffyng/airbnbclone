@@ -1,0 +1,37 @@
+{
+  "name": "thesis",
+  "version": "1.0.0",
+  "description": "The project description",
+  "main": "./Thesis/server/index.js",
+  "scripts": {
+    "test": "mocha test/*js --exit",
+    "database": "node ./Database/generate.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuchristina/hrsf83-thesis.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yuchristina/hrsf83-thesis/issues"
+  },
+  "homepage": "https://github.com/yuchristina/hrsf83-thesis#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cassandra-driver": "^3.3.0",
+    "casual": "^1.5.19",
+    "elastic-apm-node": "^0.9.0",
+    "express": "^4.16.2",
+    "faker": "^4.1.0",
+    "knex": "^0.14.2",
+    "newrelic": "^2.4.2",
+    "path": "^0.12.7",
+    "pg": "^7.4.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "supertest": "^3.0.0"
+  }
+}
