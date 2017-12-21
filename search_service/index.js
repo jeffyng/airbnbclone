@@ -102,7 +102,7 @@ app.use(function (req, res) {
 // Any errors caught by express will be logged by apm agent 
 app.use(apm.middleware.express());
 
-app.listen(port, '127.0.0.1',function() {
+app.listen(port, function() {
   console.log('Server is running on port:', port);
 });
 
