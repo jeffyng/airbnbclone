@@ -9,10 +9,16 @@ const client = new elasticsearch.Client({
   host: 'localhost:9200'
 });
 const port = process.env.PORT || 3000;
-const { postClickToEvents , postListingToEvents, postListingToListings, queue} = require('./requestHelpers/requestHelpers.js');
+
+const { 
+  postClickToEvents , 
+  postListingToEvents, 
+  postListingToListings, 
+  queue} = require('./requestHelpers/requestHelpers.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
 
 // Gets initial listings of searched city
 const cache = {};
@@ -78,6 +84,7 @@ app.post('/listings/clicks', function (req, res) {
 app.post('/listings/add', function (req, res) {
   const listingData = req.body;
   if (Object.keys(listingData).length && Object.keys(listingData).includes('id')) {
+    // if (true) {
     res.sendStatus(201);
     // postListingToEvents(listingData);
     // postListingToListings(listingData);
@@ -95,8 +102,8 @@ app.use(function (req, res) {
 // Any errors caught by express will be logged by apm agent 
 app.use(apm.middleware.express());
 
-app.listen(port, function() {
-  console.log('Server is running...');
+app.listen(port, '127.0.0.1',function() {
+  console.log('Server is running on port:', port);
 });
 
 module.exports = app;
