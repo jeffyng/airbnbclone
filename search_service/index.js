@@ -9,6 +9,7 @@ const client = new elasticsearch.Client({
   host: 'localhost:9200'
 });
 const port = process.env.PORT || 3000;
+const { postClickToEvents , postListingToEvents, postListingToListings, queue} = require('./requestHelpers/requestHelpers.js');
 
 const { 
   postClickToEvents , 
