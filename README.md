@@ -10,5 +10,3 @@ A backend NodeJS/Express server that handles search queries (US cities) from cli
 
 # Prerequisites:
 Need to install Elasticsearch and Redis. 
-Project Title
-One Paragraph of project description goes here
