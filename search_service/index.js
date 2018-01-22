@@ -10,8 +10,6 @@ const client = new elasticsearch.Client({
 });
 const redisClient = require('redis').createClient();
 const port = process.env.PORT || 3000;
-const { postClickToEvents , postListingToEvents, postListingToListings, queue} = require('./requestHelpers/requestHelpers.js');
-
 const { 
   postClickToEvents , 
   postListingToEvents, 
@@ -26,7 +24,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 // Gets initial listings of searched city
-const cache = {};
+//const cache = {};
 app.get('/listings/search/:city', function(req, res) {
   const city = req.params.city;
   redisClient.get(city + '1', function(err, reply){
@@ -48,7 +46,7 @@ app.get('/listings/search/:city', function(req, res) {
           data: hits
         });
         var cacheValue = JSON.stringify({city: city, data: hits})
-        redisClient.set(city + '1', cacheValue, function(err, reply){
+        redisClient.set(city + '1', cacheValue, 'EX', 60, function(err, reply){
           if(err) {
             console.log('Redis set erro: ', + err);
           }
@@ -83,6 +81,12 @@ app.get('/listings/search/:city/:pagenum', function(req, res) {
         res.json({
           city: city,
           data: hits
+        })
+        var cacheValue = JSON.stringify({city: city, data: hits});
+        redisClient.set(city + pageNum, cacheValue, 'EX', 60, function(err, reply){
+          if(err) {
+            console.log('Redis set erro: ', + err);
+          }
         })
       })
       .catch(function (err) {

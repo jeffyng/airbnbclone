@@ -1,8 +1,0 @@
-loadtest -t 20 -c 1 --rps 1000 -k http://localhost:3000/updatelisting -A '{"city": "London", "availability": true, "isinterior":false, "id":1}' -T 'application/json'
-
-
-loadtest -n 1000 -c 1 -k http://localhost:3000/updatelisting -A '{"city": "London", "availability": true, "isinterior":false, "id":1}' -T 'application/json'
-
-loadtest -n 1000 -c 1 -k http://localhost:3000/newlisting -P '{"city": "London", "availability": true, "isinterior":false}' -T 'application/json'
-
-ab -p post.txt -T 'application/json' -t 60 -n 10000000 -k http://localhost:3000/newlisting
